@@ -11,8 +11,6 @@
     aria-label="Menu"
   ></div>
 
-  {{ $bg_color := $.Scratch.Get "bg_color" }}<!---->
-
   <script>
     // base
     const htmlClass = document.documentElement.classList;
@@ -45,11 +43,11 @@
 
     {{ with $.Scratch.Get "social_list" }}
     <nav
-      class="mt-12 flex justify-center space-x-10 rtl:space-x-reverse dark:invert ltr:lg:ml-14 rtl:lg:mr-14 lg:mt-0 lg:items-center"
+      class="mt-12 flex justify-center space-x-10 rtl:space-x-reverse ltr:lg:ml-14 rtl:lg:mr-14 lg:mt-0 lg:items-center"
     >
       {{ range . }}<!---->
       <a
-        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6 dark:invert"
         style="--url: url(./{{ . }}.svg)"
         href="{{ if eq . `rss` }}{{ `index.xml` | absURL }}{{ else if eq . `mastodon` }}{{ index site.Params . }}{{ else }}{{ if eq . `threads` }}https://threads.net/{{ else if eq . `bluesky` }}https://bsky.app/profile/{{ else }}https://{{ . }}.com/{{ end }}{{ if eq . `linkedin` }}in/{{ end }}{{ index site.Params . }}{{ end }}"
         target="_blank"
@@ -58,6 +56,12 @@
         {{ . }}
       </a>
       {{ end }}<!---->
+
+      <div
+        class="btn-dark text-[0] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer {{ if site.Params.monoDarkIcon }}[background:url(./theme.svg)_left_center/cover_no-repeat] dark:invert{{ else }}[background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)]{{ end }} dark:[background-position:right]"
+        role="button"
+        aria-label="Dark"
+      ></div>
     </nav>
     {{ end }}<!---->
   </div>
