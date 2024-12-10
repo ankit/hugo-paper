@@ -1,6 +1,7 @@
 {{ define "main" }}
 
 <article>
+  {{ if .Title }}
   <header class="mb-14">
     <h1 class="!my-0 pb-2.5">{{ .Title }}</h1>
 
@@ -18,6 +19,7 @@
     </div>
     {{ end }}
   </header>
+  {{ end }}
 
   <section>{{ .Content }}</section>
 
